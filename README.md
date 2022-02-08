@@ -2,11 +2,11 @@
 
 ## Description
 
-Spinebound is an online book catalog which allows users to browse its database of books, view information about specific books, record their favourite books, and leave reviews with a message and a rating out of 5 stars.
+Spinebound is an online book catalog which allows users to browse its database of books, view information about specific books, record their favourite books and leave reviews with a message and a rating out of 5 stars.
 
 ![Spinebound](image.png)
 
-I developed this project as part of assignments 2 and 3 for [CS 235 (Software Development Methodologies)](https://courseoutline.auckland.ac.nz/dco/course/COMPSCI/235/1215) during Semester 2 2021. It is built using Flask and SQLAlchemy with testing done through pytest. My grade for both assignments was A+ (100%).
+I developed this project as part of assignments 2 and 3 for [CS 235 (Software Development Methodologies)](https://courseoutline.auckland.ac.nz/dco/course/COMPSCI/235/1215) during Semester 2 2021. It is built using Flask, Jinja and SQLAlchemy with testing done through pytest. My grade for both assignments was A+ (100%).
 
 ## Installation
 
