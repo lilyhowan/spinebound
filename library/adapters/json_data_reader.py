@@ -73,7 +73,7 @@ class BooksJSONReader:
             for author in list_of_authors:
                 author_id = author['author_id']
                 # We assume book authors are available in the authors file,
-                # otherwise more complex handling is required.
+                # otherwise more complex handling is required
                 author_name = None
                 for author_json in authors_json:
                     if author_json['author_id'] == author_id:

@@ -12,12 +12,12 @@ from library.domain.model import User, Book, Author, Publisher, make_review, mak
 def read_csv_file(filename: str):
     with open(filename, encoding='utf-8-sig') as infile:
         reader = csv.reader(infile)
-        # Read first line of the the CSV file.
+        # Read first line of the the CSV file
         headers = next(reader)
 
-        # Read remaining rows from the CSV file.
+        # Read remaining rows from the CSV file
         for row in reader:
-            # Strip any leading/trailing white space from data read.
+            # Strip any leading/trailing white space from data read
             row = [item.strip() for item in row]
             yield row
 

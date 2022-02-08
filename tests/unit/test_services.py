@@ -123,7 +123,7 @@ class TestBookServices:
         # Retrieve the reviews for the article from the repository
         reviews_as_dict = book_services.get_reviews_for_book(book_id, in_memory_repo)
 
-        # Check that the reviews include a review with the new comment text.
+        # Check that the reviews include a review with the new comment text
         assert next(
             (dictionary['review_text'] for dictionary in reviews_as_dict if dictionary['review_text'] == review_text),
             None) is not None

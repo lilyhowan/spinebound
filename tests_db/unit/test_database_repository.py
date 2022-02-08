@@ -50,7 +50,7 @@ def test_repository_can_retrieve_book_count(session_factory):
 
     number_of_books = repo.get_number_of_books()
 
-    # Check that the query returned 20 Books.
+    # Check that the query returned 20 Books
     assert number_of_books == 20
 
 
@@ -69,10 +69,10 @@ def test_repository_can_retrieve_book(session_factory):
     book = repo.get_book(18955715)
     print(book)
 
-    # Check that the Book has the expected title.
+    # Check that the Book has the expected title
     assert book.title == 'D.Gray-man, Vol. 16: Blood & Chains'
 
-    # Check that the Book is reviewed as expected.
+    # Check that the Book is reviewed as expected
     review_one = [review for review in book.reviews if review.review_text == 'Could have been better'][0]
     review_two = [review for review in book.reviews if review.review_text == 'Great book'][0]
 

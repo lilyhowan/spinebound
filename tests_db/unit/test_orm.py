@@ -179,14 +179,14 @@ def test_saving_of_review(empty_session):
     book = rows[0]
     user = empty_session.query(User).filter(User._User__user_name == "Andrew").one()
 
-    # Create a new Review that is bidirectionally linked with the User and Book.
+    # Create a new Review that is bidirectionally linked with the User and Book
     review_text = "Some review text."
     rating = 3
     review = make_review(user, book, review_text, rating)
 
     # Note: if the bidirectional links between the new Review and the User and
     # Book objects hadn't been established in memory, they would exist following
-    # committing the addition of the Review to the database.
+    # committing the addition of the Review to the database
     empty_session.add(review)
     empty_session.commit()
 
@@ -211,22 +211,22 @@ def test_saving_book_with_authors(empty_session):
     # Establish the bidirectional relationship between the Book and the Author
     make_author_association(book, author)
 
-    # Persist the Book (and Author).
+    # Persist the Book (and Author)
     # Note: it doesn't matter whether we add the Author or the Book. They are connected
-    # bidirectionally, so persisting either one will persist the other.
+    # bidirectionally, so persisting either one will persist the other
     empty_session.add(book)
     empty_session.commit()
 
-    # Test test_saving_of_book() checks for insertion into the books table.
+    # Test test_saving_of_book() checks for insertion into the books table
     rows = list(empty_session.execute('SELECT id FROM books'))
     book_key = rows[0][0]
 
-    # Check that the authors table has a new record.
+    # Check that the authors table has a new record
     rows = list(empty_session.execute('SELECT id, full_name FROM authors'))
     author_key = rows[0][0]
     assert rows[0][1] == "Natsuki Takaya"
 
-    # Check that the book_authors table has a new record.
+    # Check that the book_authors table has a new record
     rows = list(empty_session.execute('SELECT book_id, author_id from book_authors'))
     book_foreign_key = rows[0][0]
     author_foreign_key = rows[0][1]
@@ -244,25 +244,25 @@ def test_saving_book_with_publisher(empty_session):
 
     # Persist the Book (and Publisher).
     # Note: it doesn't matter whether we add the Publisher or the Book. They are connected
-    # bidirectionally, so persisting either one will persist the other.
+    # bidirectionally, so persisting either one will persist the other
     empty_session.add(book)
     empty_session.commit()
 
-    # Test test_saving_of_book() checks for insertion into the books table.
+    # Test test_saving_of_book() checks for insertion into the books table
     rows = list(empty_session.execute('SELECT publisher_name FROM books'))
     assert rows[0][0] == "Madman Entertainment"
 
-    # Check that the publishers table has a new record.
+    # Check that the publishers table has a new record
     rows = list(empty_session.execute('SELECT name FROM publishers'))
     assert rows[0][0] == "Madman Entertainment"
 
 
 def test_save_reviewed_book(empty_session):
-    # Create Book, User objects.
+    # Create Book, User objects
     book = make_book()
     user = make_user()
 
-    # Create a new Review that is bidirectionally linked with the User and Book.
+    # Create a new Review that is bidirectionally linked with the User and Book
     review_text = "Some review text."
     review = make_review(book, user, review_text, 5)
 
@@ -270,15 +270,15 @@ def test_save_reviewed_book(empty_session):
     empty_session.add(book)
     empty_session.commit()
 
-    # Test test_saving_of_book() checks for insertion into the books table.
+    # Test test_saving_of_book() checks for insertion into the books table
     rows = list(empty_session.execute('SELECT id FROM books'))
     book_key = rows[0][0]
 
-    # Test test_saving_of_users() checks for insertion into the users table.
+    # Test test_saving_of_users() checks for insertion into the users table
     rows = list(empty_session.execute('SELECT id FROM users'))
     user_key = rows[0][0]
 
     # Check that the reviews table has a new record that links to the books and users
-    # tables.
+    # tables
     rows = list(empty_session.execute('SELECT user_id, book_id, review_text, rating FROM reviews'))
     assert rows == [(user_key, book_key, review_text, 5)]

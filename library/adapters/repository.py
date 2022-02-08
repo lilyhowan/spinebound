@@ -15,7 +15,7 @@ class RepositoryException(Exception):
 class AbstractRepository(abc.ABC):
     @abc.abstractmethod
     def add_user(self, user: User):
-        """" Adds a User to the repository. """
+        """ Adds a User to the repository. """
         raise NotImplementedError
 
     @abc.abstractmethod
@@ -94,7 +94,7 @@ class AbstractRepository(abc.ABC):
 
     @abc.abstractmethod
     def add_author(self, author: Author):
-        """" Adds an Author to the repository """
+        """ Adds an Author to the repository """
         raise NotImplementedError
 
     @abc.abstractmethod
@@ -117,7 +117,7 @@ class AbstractRepository(abc.ABC):
 
     @abc.abstractmethod
     def add_publisher(self, publisher: Publisher):
-        """" Adds a Publisher to the repository """
+        """ Adds a Publisher to the repository """
         raise NotImplementedError
 
     @abc.abstractmethod

@@ -5,7 +5,7 @@ from typing import List, Iterable
 class Publisher:
 
     def __init__(self, publisher_name: str):
-        # This makes sure the setter is called here in the initializer/constructor as well.
+        # This makes sure the setter is called here in the initializer/constructor as well
         self.name = publisher_name
         self.__books: List[Book] = list()
 
@@ -17,7 +17,7 @@ class Publisher:
     def name(self, publisher_name: str):
         self.__name = "N/A"
         if isinstance(publisher_name, str):
-            # Make sure leading and trailing whitespace is removed.
+            # Make sure leading and trailing whitespace is removed
             publisher_name = publisher_name.strip()
             if publisher_name != "":
                 self.__name = publisher_name
@@ -68,13 +68,13 @@ class Author:
 
         self.__unique_id = author_id
 
-        # Uses the attribute setter method.
+        # Uses the attribute setter method
         self.full_name = author_full_name
 
         self.__books = []
 
-        # Initialize author colleagues data structure with empty set.
-        # We use a set so each unique author is only represented once.
+        # Initialize author colleagues data structure with empty set
+        # We use a set so each unique author is only represented once
         self.__authors_this_one_has_worked_with = set()
 
     @property
@@ -188,7 +188,7 @@ class Book:
 
     def add_review(self, review: 'Review'):
         if isinstance(review, Review):
-            # Review objects are in practice always considered different due to their timestamp.
+            # Review objects are in practice always considered different due to their timestamp
             self.__reviews.insert(0, review)
 
     @property
@@ -362,7 +362,7 @@ class User:
 
     def add_review(self, review: 'Review'):
         if isinstance(review, Review):
-            # Review objects are in practice always considered different due to their timestamp.
+            # Review objects are in practice always considered different due to their timestamp
             self.__reviews.insert(0, review)
 
     def __repr__(self):

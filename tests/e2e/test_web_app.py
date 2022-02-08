@@ -4,11 +4,11 @@ from flask import session
 
 
 def test_register(client):
-    # Check that we retrieve the register page.
+    # Check that we retrieve the register page
     response_code = client.get('/authentication/register').status_code
     assert response_code == 200
 
-    # Check that we can register a user successfully, supplying a valid user name and password.
+    # Check that we can register a user successfully, supplying a valid user name and password
     response = client.post(
         '/authentication/register',
         data={'user_name': 'gmichael', 'password': 'CarelessWhisper1984'}
@@ -26,7 +26,7 @@ def test_register(client):
 ))
 def test_register_with_invalid_input(client, user_name, password, message):
     # Check that attempting to register with invalid combinations of user name and password generate appropriate error
-    # messages.
+    # messages
     response = client.post(
         '/authentication/register',
         data={'user_name': user_name, 'password': password}
@@ -35,15 +35,15 @@ def test_register_with_invalid_input(client, user_name, password, message):
 
 
 def test_login(client, auth):
-    # Check that we can retrieve the login page.
+    # Check that we can retrieve the login page
     status_code = client.get('/authentication/login').status_code
     assert status_code == 200
 
-    # Check that a successful login generates a redirect to the homepage.
+    # Check that a successful login generates a redirect to the homepage
     response = auth.login()
     assert response.headers['Location'] == 'http://localhost/'
 
-    # Check that a session has been created for the logged-in user.
+    # Check that a session has been created for the logged-in user
     with client:
         client.get('/')
         assert session['user_name'] == 'thorke'
@@ -114,7 +114,7 @@ def test_review_with_invalid_input(client, auth, review, messages):
         '/review?book_id=18355356',
         data={'review_text': review, 'rating': 2}
     )
-    # Check that supplying invalid comment text generates appropriate error messages.
+    # Check that supplying invalid comment text generates appropriate error messages
     for message in messages:
         assert message in response.data
 
