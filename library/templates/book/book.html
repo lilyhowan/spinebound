@@ -1,0 +1,122 @@
+{% extends 'layout.html' %} {% block content %}
+{% if book %}
+    <div id="book-page-wrapper">
+        <div class="book-page-left">
+            <div class="book book-page-cover"><img src="{{ book['image_url'] }}" alt="Book Cover"></div>
+                <div class="book-info-wrapper">
+                    <div id="review-stats">
+                        <p>
+                            {% for star in range(stats['stars']) -%}
+                                <span class="material-icons-round star">&#xe838;</span>
+                            {%- endfor %}
+                            {%- for empty in range(5 - stats['stars']) -%}
+                                <span class="material-icons-round star-empty">&#xe83a;</span>
+                            {%- endfor %}
+                        </p>
+                        <p>{{ stats['average'] }}&nbsp;out of 5 stars</p>
+                    </div>
+                    <div id="book-page-buttons">
+                        <button id="review-btn" class="purple-btn" onclick="location.href='{{ url_for('book_bp.review', book_id=book['id']) }}'">Write a Review</button>
+                        <form method="post">
+                            {{ form.csrf_token }}
+                            {% if is_favourite %}
+                                {{ form.favourite(class_="material-icons-round fave-btn favourited") }}
+                            {% else %}
+                                {{ form.favourite(class_="material-icons-round fave-btn") }}
+                            {% endif %}
+                        </form>
+                    </div>
+                <div class="book-info">
+                    <div class="book-data">
+                        <p><span class="bold-text">Publisher</span><br>{{ book['publisher'] }}</p>
+                    </div>
+                    <div class="book-data">
+                        <p><span class="bold-text">Authors</span><br>
+                            {% for author in book['authors'] -%}
+                                {% if loop.last %}
+                                    {{ author[1] }}
+                                {% else %}
+                                    {{ author[1] }},
+                                {% endif %}
+                            {%- endfor %}
+                        </p>
+                    </div>
+
+                    <div class="book-data">
+                        <p><span class="bold-text">Release Year</span><br>
+                            {% if book['release_year'] %}
+                                {{ book['release_year'] }}
+                            {% else %}
+                                Unknown
+                            {% endif %}
+                        </p>
+                    </div>
+
+                    <div class="book-data">
+                        <p><span class="bold-text">Ebook?</span><br>{% if book['ebook'] == True %} Yes {% else %} No {% endif %}</p>
+                    </div>
+
+                    <div class="book-data">
+                        <p><span class="bold-text">Number of Pages</span><br>
+                            {% if book['num_pages'] %}
+                                {{ book['num_pages'] }}
+                            {% else %}
+                                Unknown
+                            {% endif %}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="book-page-right">
+            <h1 id="book-page-title">{{ book['title'] }}</h1>
+            <hr>
+            <div id="book-description">{{ book['description'] }}</div>
+            <div id="review-section-wrapper">
+                <h2>User Reviews</h2>
+                <hr>
+                <div class="user-review">
+                    {% if reviews %}
+                        {% for review in reviews %}
+                            <div class="review-content">
+                                <div class="review-header">
+                                    {% for star in range(review['rating']) -%}
+                                        <span class="material-icons-round star">&#xe838;</span>
+                                    {%- endfor %}
+                                    {%- for empty in range(5 - review['rating']) -%}
+                                        <span class="material-icons-round">&#xe83a;</span>
+                                    {%- endfor -%}&nbsp;Review by {{ review['user_name'] }} on {{ review['timestamp'] }}
+                                </div>
+                                <div class="review-body">{{ review['review_text'] }}</div>
+                            </div>
+                        {% endfor %}
+                </div>
+                <div class="nav-buttons">
+                {% if prev_page_url is not none %}
+                  <button class="btn material-icons-round" onclick="location.href='{{ prev_page_url }}'">arrow_back</button>
+                {% else %}
+                  <button class="btn-disabled material-icons-round" disabled>arrow_back</button>
+                {% endif %}
+                {% if next_page_url is not none %}
+                  <button class="btn material-icons-round" onclick="location.href='{{ next_page_url }}'">arrow_forward</button>
+                {% else %}
+                  <button class="btn-disabled material-icons-round" disabled>arrow_forward</button>
+                {% endif %}
+                    {% else %}
+                        <p>No reviews yet... Why not be the first?</p>
+                    {% endif %}
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+{% else %}
+    <div class="missing-content">
+        <p>We're sorry, but this book could not be found.<br>
+        <a class="bold-text" href="/browse">Return to Browse?</a></p>
+    </div>
+{% endif %}
+{% endblock %}
+
+

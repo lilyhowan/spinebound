@@ -1,0 +1,48 @@
+{% extends 'layout.html' %} {% block content %}
+<div class="review-page-wrapper">
+    <div class="review-page-header">
+        <h1>Write a Review</h1>
+        <hr>
+        {% if book %}
+        <p>You're reviewing <a href="{{ url_for('book_bp.book', book_id=book['id']) }}">{{ book['title'] }}</a></p>
+    </div>
+    <div class="review-page-content">
+        <div class="review-page-left">
+            <div class="book"><img src="{{ book['image_url'] }}" alt="Book Cover"></div>
+        </div>
+        <div class="review-page-left">
+            <div class="review-wrapper">
+                <form id="review-form" method="post">
+                    {{ form.csrf_token }}
+                    {{ form.review_text(placeholder="Type your review...", cols="50", rows="10") }}
+                    {% if form.review_text.errors %}
+                    <ul class="errors">
+                        {% for error in form.review_text.errors %}
+                        <li>{{error}}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                    <div class="rate-area">
+                        {% for subfield in form.rating %}
+                            {{ subfield }}
+                            {{ subfield.label }}
+                        {% endfor %}
+                    </div>
+                    {% if form.rating.errors %}
+                    <ul class="errors">
+                        {% for error in form.rating.errors %}
+                        <li>{{error}}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                    {{ form.submit }}
+                </form>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <p>We're sorry, but this book could not be found. Return to Browse?</p>
+    {% endif %}
+</div>
+
+{% endblock %}

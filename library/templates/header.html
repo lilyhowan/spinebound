@@ -1,0 +1,20 @@
+<nav>
+    <div id="nav-left"><a href="{{ url_for('home_bp.home') }}"><h1 class="material-icons-round">auto_awesome</h1></a></div>
+<div id="nav-middle">
+    <ul>
+  <li><a href="{{ url_for('home_bp.home') }}">Home</a></li>
+  <li><a href="{{ url_for('browse_bp.bookshelf') }}">My Books</a></li>
+  <li><a href="{{ url_for('browse_bp.browse') }}">Browse</a></li>
+</ul>
+</div>
+<div id="nav-right">
+<ul>
+    {% if session['user_name'] %}
+        <li><a href="{{ url_for('authentication_bp.logout') }}">Log out</a></li>
+    {% else %}
+        <li><a href="{{ url_for('authentication_bp.login') }}">Login</a></li>
+        <li><a id="register-link" class="glow-btn" href="{{ url_for('authentication_bp.register') }}">Register</a></li>
+    {% endif %}
+</ul>
+</div>
+</nav>

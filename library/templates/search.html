@@ -1,0 +1,31 @@
+<form id="search-wrap" method="post">
+  <h2 id="search-title" >Filter by</h2>
+  <hr>
+  <div id="search-filters">
+    {{ search_form.csrf_token }}
+      <div class="search-input">
+      {{ search_form.title.label }}
+      {{ search_form.title(placeholder="Title") }}
+    </div>
+    <div class="search-input">
+      {{ search_form.author.label }}
+      {{ search_form.author(placeholder="Author") }}
+    </div>
+    <div class="search-input">
+      {{ search_form.publisher.label }}
+      {{ search_form.publisher(placeholder="Publisher") }}
+    </div>
+    <div class="search-input">
+      {{ search_form.year.label }}
+      {{ search_form.year(placeholder="Year") }}
+      <ul class="errors">
+        {% for error in search_form.year.errors %}
+          <li>{{ error }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+    <div class="search-input">
+      {{ search_form.search_submit }}
+    </div>
+  </div>
+</form>

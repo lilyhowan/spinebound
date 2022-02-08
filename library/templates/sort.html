@@ -1,0 +1,14 @@
+<form id="sort-wrap" method="post">
+  {{ sort_form.csrf_token }}
+  <div class="sort-input">
+    <p>Sort by</p>
+    {{ sort_form.sort_by }}
+  </div>
+  <div class="sort-input">
+    Books per page
+    {{ sort_form.books_per_page }}
+  </div>
+  <div class="sort-input">
+    {{ sort_form.sort_submit(class_="material-icons-round") }}
+  </div>
+</form>
